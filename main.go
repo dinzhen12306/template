@@ -2,15 +2,22 @@ package main
 
 import (
 	"github.com/dinzhen12306/framework/grpc"
-	"github.com/dinzhen12306/message/user"
 	"github.com/dinzhen12306/template/api"
+	"github.com/dinzhen12306/template/config"
 	_ "github.com/dinzhen12306/template/config"
+	"github.com/dinzhen12306/template/model/mysql"
 	grpc2 "google.golang.org/grpc"
 )
 
 func main() {
-	err := grpc.NewGrpcRegister(8081, func(grpcServer *grpc2.Server) {
-		user.RegisterUserServerServer(grpcServer, new(api.UserRpcServer))
+	nacosConfig := config.NewNacosConfig()
+	err := nacosConfig.Mysql.Init()
+	if err != nil {
+		panic(err)
+	}
+	mysql.MigrationDatabases()
+	err = grpc.NewGrpcRegister(8081, func(grpcServer *grpc2.Server) {
+		api.Register(grpcServer)
 	})
 	if err != nil {
 		panic(err)
