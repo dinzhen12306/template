@@ -10,12 +10,24 @@ import (
 )
 
 func main() {
-	nacosConfig := config.NewNacosConfig()
-	err := nacosConfig.Mysql.Init()
+	err := config.NewNacosConfig(func() error {
+		err := mysql.Init()
+		if err != nil {
+			return err
+		}
+		mysql.MigrationDatabases()
+		return nil
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	err = mysql.Init()
 	if err != nil {
 		panic(err)
 	}
 	mysql.MigrationDatabases()
+
 	err = grpc.NewGrpcRegister(8081, func(grpcServer *grpc2.Server) {
 		api.Register(grpcServer)
 	})

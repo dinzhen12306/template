@@ -5,13 +5,16 @@ go 1.21.3
 require (
 	github.com/dinzhen12306/framework v0.0.0-20240226114056-37e37fe9857c
 	github.com/dinzhen12306/message v0.0.0-20240226111516-6b4e31eaf66a
+	github.com/go-redis/redis/v7 v7.4.1
+	google.golang.org/grpc v1.62.0
+	gopkg.in/yaml.v2 v2.2.4
+	xorm.io/xorm v1.3.8
 )
 
 require (
 	github.com/aliyun/alibaba-cloud-sdk-go v1.61.18 // indirect
 	github.com/buger/jsonparser v1.1.1 // indirect
 	github.com/go-errors/errors v1.0.1 // indirect
-	github.com/go-redis/redis/v7 v7.4.1 // indirect
 	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/goccy/go-json v0.8.1 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
@@ -31,11 +34,13 @@ require (
 	golang.org/x/sys v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80 // indirect
-	google.golang.org/grpc v1.62.0 // indirect
 	google.golang.org/protobuf v1.32.0 // indirect
 	gopkg.in/ini.v1 v1.42.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
-	gopkg.in/yaml.v2 v2.2.4 // indirect
 	xorm.io/builder v0.3.11-0.20220531020008-1bd24a7dc978 // indirect
-	xorm.io/xorm v1.3.8 // indirect
+)
+
+replace (
+	github.com/dinzhen12306/framework v0.0.0-20240226114056-37e37fe9857c => ../framework
+	github.com/dinzhen12306/message v0.0.0-20240226111516-6b4e31eaf66a => ../message
 )

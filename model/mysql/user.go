@@ -1,8 +1,8 @@
 package mysql
 
 import (
-	nacos "github.com/dinzhen12306/framework/config"
 	"github.com/dinzhen12306/message/user"
+	"github.com/dinzhen12306/template/golbe"
 	"time"
 )
 
@@ -24,25 +24,25 @@ func NewUser() *User {
 }
 
 func (u *User) Create() (err error) {
-	_, err = nacos.XDB.Insert(u)
+	_, err = golbe.XDB.Insert(u)
 	return
 }
 func (u *User) Get(where map[string]interface{}) (err error) {
-	_, err = nacos.XDB.Where(where).Get(u)
+	_, err = golbe.XDB.Where(where).Get(u)
 	return
 }
 
 func (u *User) GetUsers(limit, offset int64) (users []User, err error) {
-	err = nacos.XDB.Limit(int(limit), int(offset)).Find(&users)
+	err = golbe.XDB.Limit(int(limit), int(offset)).Find(&users)
 	return
 }
 
 func (u *User) Update() (err error) {
-	_, err = nacos.XDB.Where("id = ?", u.Id).Update(u)
+	_, err = golbe.XDB.Where("id = ?", u.Id).Update(u)
 	return
 }
 func (u *User) Delete() (err error) {
-	_, err = nacos.XDB.Table(u).Where("id = ?", u.Id).Delete()
+	_, err = golbe.XDB.Table(u).Where("id = ?", u.Id).Delete()
 	return
 }
 func (u *User) MysqlToPb() *user.User {
